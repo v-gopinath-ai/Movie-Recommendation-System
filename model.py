@@ -5,17 +5,19 @@ movies = pd.read_csv("dataset/tmdb_5000_movies.csv")
 credits = pd.read_csv("dataset/tmdb_5000_credits.csv")
 
 # ======================================
+# Merge Datasets
+# ======================================
+
+movies = movies.merge(credits, on="title")
+
+# ======================================
 # Dataset information
 # ======================================
 
-print("Movies Dataset Shape:")
+print("Merged Dataset Shape")
 print(movies.shape)
 
-print("\nCredits Dataset Shape:")
-print(credits.shape)
+print("\n")
 
-print("\nMovies Columns")
-print(movies.columns)
-
-print("\nCredits Columns")
-print(credits.columns)
+print("First 5 Rows:")
+print(movies.head())
