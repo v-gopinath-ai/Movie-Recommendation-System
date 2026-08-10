@@ -1,5 +1,6 @@
 import pandas as pd
 import ast
+from sklearn.feature_extraction.text import CountVectorizer
 
 # Load The Movie Dataset
 movies = pd.read_csv("dataset/tmdb_5000_movies.csv")
@@ -92,6 +93,20 @@ movies["tags"] = movies["tags"].apply(lambda x:"".join(map(str,x)))
 
 # Keep only the columns we need
 movies = movies[["movie_id","title","tags"]]
+
+# ======================================
+# Text Vectorization
+# ======================================
+
+cv = CountVectorizer(
+    max_features = 5000,
+    stop_words = "english"
+)
+
+vectors = cv.fit_transform(movies["tags"]).toarray()
+
+print("\nVectorized Data Shape:")
+print(vectors.shape)
 
 # ======================================
 # Dataset information
