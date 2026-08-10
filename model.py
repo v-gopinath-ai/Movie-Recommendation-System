@@ -69,11 +69,35 @@ def get_director(text):
 
 print("\nProcessed Movie information:")
 print(movies[["title","genres","keywords","cast","crew"]].head())
+
+# ======================================
+# Create Tags
+# ======================================
+
+# Convert overview into a list of words
+movies["overview"] = movies["overview"].apply(lambda x: x.split() if isinstance(x,str)else[])
+for column in ["genres","keywords","cast","crew"]:
+    movies[column] = movies[column].apply(lambda x: x if isinstance(x,list) else[] ) 
+# Combine all important features
+movies["tags"] = (
+    movies["overview"]
+    + movies["genres"]
+    + movies["keywords"]
+    + movies["cast"]
+    + movies["crew"]
+                  )
+
+# Convert the list into a single string
+movies["tags"] = movies["tags"].apply(lambda x:"".join(map(str,x)))
+
+# Keep only the columns we need
+movies = movies[["movie_id","title","tags"]]
+
 # ======================================
 # Dataset information
 # ======================================
+print("\nMovie Tags:")
+print(movies.head())
 
-#print(movies.head())
-
-#print("\nDataset Shape:")
-#print(movies.shape)
+print("\nDataset Shape:")
+print(movies.shape)
