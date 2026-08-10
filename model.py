@@ -1,6 +1,7 @@
 import pandas as pd
 import ast
 from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 
 # Load The Movie Dataset
 movies = pd.read_csv("dataset/tmdb_5000_movies.csv")
@@ -108,6 +109,13 @@ vectors = cv.fit_transform(movies["tags"]).toarray()
 print("\nVectorized Data Shape:")
 print(vectors.shape)
 
+# ======================================
+# Calculates Cosine Similarity
+# ======================================
+
+similarity = cosine_similarity(vectors)
+print("\nSimilarity Matrix Shape")
+print(similarity.shape)
 # ======================================
 # Dataset information
 # ======================================
