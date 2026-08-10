@@ -17,6 +17,32 @@ movies = movies.merge(credits, on="title")
 movies = movies[['movie_id','title','overview','genres','keywords','cast','crew']]
 
 # ======================================
+# Clean The Dataset
+# ======================================
+
+print ("Missing values before cleaning:")
+print(movies.isnull().sum())
+
+# Remove movies without an overview
+movies.dropna(subset=["overview"],inplace=True)
+
+# Fill Other missing values
+movies["genres"] = movies["genres"].fillna("[]")
+movies["keywords"] = movies["keywords"].fillna("[]")
+movies["cast"] = movies["cast"].fillna("[]")
+movies["crew"] = movies["crew"].fillna("[]")
+
+# Reset index
+movies.reset_index(drop=True,inplace=True)
+
+# Check the cleaned dataset
+print("\nMissing values after cleaning:")
+print(movies.isnull().sum())
+
+print("\nCleaned dataset shape:")
+print(movies.shape)
+
+# ======================================
 # Dataset information
 # ======================================
 
