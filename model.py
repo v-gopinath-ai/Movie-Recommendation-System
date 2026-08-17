@@ -116,6 +116,27 @@ print(vectors.shape)
 similarity = cosine_similarity(vectors)
 print("\nSimilarity Matrix Shape")
 print(similarity.shape)
+
+# ======================================
+# Recommendation Function
+# ======================================
+
+def recommend (movie):
+    matches =movies[movies["title"].str.lower().str.strip().str.contains(movie.lower().strip(),na=False)]
+
+    if matches.empty:
+        print("Movie not found.")
+        return
+    index = matches.index[0]
+
+    distances=similarity[index]
+
+    movie_list=sorted(list(enumerate(distances)),reverse=True,key=lambda x: x[1])
+    print(f"\nRecommendations For:{movies.iloc[index]['title']}")
+
+    for i in movie_list[1:6]:
+        print(movies.iloc[i[0]]["title"])
+recommend("Avatar")
 # ======================================
 # Dataset information
 # ======================================
