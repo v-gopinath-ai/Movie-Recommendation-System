@@ -1,11 +1,23 @@
 import pandas as pd
 import ast
+import pickle
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+
+
 
 # Load The Movie Dataset
 movies = pd.read_csv("dataset/tmdb_5000_movies.csv")
 credits = pd.read_csv("dataset/tmdb_5000_credits.csv")
+
+# ======================================
+# Dataset information
+# ======================================
+print("\nMovie Tags:")
+print(movies.head())
+
+print("\nDataset Shape:")
+print(movies.shape)
 
 # ======================================
 # Merge Datasets
@@ -136,12 +148,10 @@ def recommend (movie):
 
     for i in movie_list[1:6]:
         print(movies.iloc[i[0]]["title"])
-recommend("Avatar")
-# ======================================
-# Dataset information
-# ======================================
-print("\nMovie Tags:")
-print(movies.head())
 
-print("\nDataset Shape:")
-print(movies.shape)
+#save model data
+pickle.dump(movies,open("movies.pkl","wb"))
+pickle.dump(similarity,open ("similarity.pkl","wb"))
+
+print("\nModel data saved successfully")
+recommend("Avatar")
