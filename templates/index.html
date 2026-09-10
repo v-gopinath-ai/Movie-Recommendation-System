@@ -2,10 +2,16 @@
 <html>
 <head>
     <title>Movie Recommendation System </title>
+    <link rel="stylesheet"
+    href="{{url_for('static',filename='style.css')}}">
 </head>
 
 <body>
+    <div class="container">
     <h1>Movie Recommendation System</h1>
+    <p class="subtitle">
+        Find movies similar to your favourite movie
+    </p>
     <form method="POST">
         <input
         type = "text"
@@ -16,7 +22,7 @@
         </button>
         </form>
         {% if movie_name %}
-         <h3>Recommendations For {{movie_name}}</h3>
+         <h2> Recommendations For {{movie_name}} </h3>
          {% if recommendations %}
          <ul>
             {% for movie in recommendations %}
@@ -28,6 +34,10 @@
             
         {% endif %}
             
-    {% endif %}
+    
+        {% endif %}
+        <div class = "footer">
+            AI-BASED MOVIE RECOMMENDATION SYSTEM
+        </div>
 </body>
 </html>
