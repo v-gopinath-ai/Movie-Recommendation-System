@@ -25,9 +25,13 @@
          <h2> Recommendations For {{movie_name}} </h3>
          {% if recommendations %}
          <ul>
-            {% for movie in recommendations %}
-            <li>{{movie}}</li>
+            <div class = "movie-grid">
+                {% for movie in recommendations %}
+                <div class="movie-card">
+                    <h3>{{movie}}</h3>
+                </div>
             {% endfor %}
+            </div>
             </ul>
             {% else %}
             <p>No recommendations found.</p>
